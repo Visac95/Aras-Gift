@@ -62,6 +62,13 @@ submitBtn.addEventListener("click", () => {
   }
   nombreUser = value;
   mostrarDatosUser();
+
+
+  try {
+    enviarDatos(nombreUser, deviceID, fechaActual());
+  } catch (error) {
+    alert(error)
+  }
 });
 
 //Cambiar fondo con flores
