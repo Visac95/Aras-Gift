@@ -96,24 +96,39 @@ body {
     margin: 0;
     height: 100vh;
     overflow: hidden;
-    background: linear-gradient(to top, #CDB4DB, #FDFDFD); /* cielo lil pastel */
+    background: linear-gradient(to top, #CDB4DB, #FDFDFD); /* cielo lila pastel */
   }
 
   .flower {
     position: absolute;
     bottom: 0;
-    width: 4px;           /* tallo */
-    height: 50px;
-    background-color: #6B8E23; /* verde pasto */
+    width: 4px; /* tallo */
+    background-color: #6B8E23;
     border-radius: 2px;
   }
 
   .bud {
     position: absolute;
-    bottom: 50px;          /* encima del tallo */
+    bottom: 0;
     width: 12px;
     height: 12px;
     background-color: #FFC8DD; /* capullo rosa */
     border-radius: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scale(0.5); /* empieza pequeño */
+    animation: bloom 5s ease-in-out forwards;
+  }
+
+  @keyframes bloom {
+    0% {
+      transform: translateX(-50%) scale(0.5);
+      background-color: #FFC8DD;
+    }
+    50% {
+      transform: translateX(-50%) scale(1);
+      background-color: #FFAFCC;
+    }
+    100% {
+      transform: translateX(-50%) scale(1.5);
+      background-color: #FF77AA; /* flor abierta */
+    }
   }
