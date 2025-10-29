@@ -4,6 +4,8 @@ const input = document.getElementById("nameInput");
 const message = document.getElementById("message");
 const overlay = document.getElementById("overlay");
 const mensajeEspera = document.getElementById("mensajeEspera");
+const value = "";
+var fechaHoraActual= new Date()
 
 function daysUntil(targetDate) {
     const now = new Date();
@@ -15,7 +17,7 @@ const target = new Date("2025-12-17T00:00:00");
 const remainingDays = daysUntil(target);
 
 submitBtn.addEventListener("click", () => {
-    const value = input.value.trim().toLowerCase();
+    value = input.value.trim().toLowerCase();
     if (value === "su nombre") {
             const remainingDays = daysUntil(target);
 
@@ -97,3 +99,16 @@ window.onload = () => {
 
 
 console.log("Script Funcionando✅");
+
+
+// GENERAR O RECUPERAR ID UNICO POR DISPOSITIVO
+let deviceID = localStorage.getItem("deviceID");
+
+if (!deviceID) {
+  // Generar un ID simple único
+  deviceID = 'device-' + Date.now() + '-' + Math.floor(Math.random() * 1000000);
+  localStorage.setItem("deviceID", deviceID);
+}
+
+console.log("ID del dispositivo:", deviceID);
+
