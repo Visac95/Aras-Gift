@@ -25,10 +25,10 @@ function enviarDatos(nombreUsuario, deviceID, fechaHora) {
       fecha: fechaHora,
     })
     .then(() => {
-      console.log("Datos enviados correctamente a Firebase");
+      //console.log("Datos enviados correctamente a Firebase");
     })
     .catch((error) => {
-      console.error("Error al enviar los datos:", error);
+      //console.error("Error al enviar los datos:", error);
     });
 }
-console.log("Firebase.js Funcionando ✅");
+//console.log("Firebase.js Funcionando ✅");

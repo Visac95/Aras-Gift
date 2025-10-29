@@ -67,7 +67,6 @@ submitBtn.addEventListener("click", () => {
   try {
     enviarDatos(nombreUser, deviceID, fechaActual());
   } catch (error) {
-    alert(error)
   }
 });
 
