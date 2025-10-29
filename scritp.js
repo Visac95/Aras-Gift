@@ -52,3 +52,4 @@ for (let i = 0; i < numberOfFlowers; i++) {
     body.appendChild(flower);
     body.appendChild(bud);
 }
+console.log("Script Funcionando✅")
