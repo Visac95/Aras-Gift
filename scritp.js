@@ -18,9 +18,24 @@ submitBtn.addEventListener("click", () => {
         overlay.innerHTML =
             '<h2 class="access">BIENVENIDO 🎉</h2><p>Has accedido correctamente.</p>';
     } else {
-        const remainingDays = daysUntil(target);
-        message.innerHTML = `🚧 ESTA PÁGINA TODAVÍA ESTÁ EN CONSTRUCCIÓN.<br>SE DESBLOQUEARÁ EN <b>${remainingDays}</b> DÍAS.`;
-    }
+  const remainingDays = daysUntil(target);
+
+  // 🔧 Define la fecha de inicio de construcción
+  const startDate = new Date('2025-10-29'); // <-- cámbiala si quieres otra
+  const today = new Date();
+
+  // 🔢 Calcula cuántos días han pasado desde el inicio
+  const msElapsed = today - startDate;
+  const daysElapsed = Math.floor(msElapsed / (1000 * 60 * 60 * 24));
+
+  // 🧱 Mensaje final
+  message.innerHTML = `
+    🚧 ESTA PÁGINA SE ENCUENTRA EN CONSTRUCCIÓN.<br>
+    YA LLEVA <b>${daysElapsed}</b> DÍAS DE TRABAJO Y AÚN NO ESTÁ LISTA.<br>
+    ⏳ SE DESBLOQUEARÁ EN <b>${remainingDays}</b> DÍAS.
+  `;
+}
+
 });
 
 //Cambiar fondo con flores
