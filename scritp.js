@@ -124,9 +124,9 @@ function mostrarDatosUser() {
   nombreUser = value;
   anchoVentana = window.innerWidth;
   altoVentana = window.innerHeight;
-  console.log("Nombre del usuario: ", nombreUser);
-  console.log("ID del dispositivo:", deviceID);
-  console.log("Fecha y hora local:", fechaActual());
+  //console.log("Nombre del usuario: ", nombreUser);
+  //console.log("ID del dispositivo:", deviceID);
+  //console.log("Fecha y hora local:", fechaActual());
 }
 
 function fechaActual() {
@@ -167,5 +167,5 @@ window.onload = () => {
   GenerarID();
 };
 
-console.log("ID del dispositivo:", deviceID);
-console.log("Script Funcionando✅");
+//console.log("ID del dispositivo:", deviceID);
+//console.log("Script Funcionando✅");

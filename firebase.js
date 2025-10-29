@@ -15,8 +15,16 @@ const app = firebase.initializeApp({
 // Referencia a la base de datos
 const database = firebase.database();
 
+firebase.auth().signInAnonymously()
+
+
 // Función global para enviar datos a Firebase
 function enviarDatos(nombreUsuario, deviceID, fechaHora) {
+  const user = firebase.auth().currentUser;
+  if (!user) {
+    //console.error("Usuario no autenticado todavía");
+    return;
+  }
   const nuevoRegistroRef = database.ref("registros").push();
   nuevoRegistroRef
     .set({
