@@ -24,31 +24,37 @@ submitBtn.addEventListener("click", () => {
 });
 
 //Cambiar fondo con flores
-const numberOfFlowers = 100; // cantidad de flores
-const body = document.body;
+let petalCount;
+  const width = window.innerWidth;
 
-for (let i = 0; i < numberOfFlowers; i++) {
-    // Crear tallo
-    const flower = document.createElement("div");
-    flower.classList.add("flower");
+  if (width < 600) {
+    petalCount = 20;   // móvil
+  } else if (width < 1000) {
+    petalCount = 37;   // tablet
+  } else {
+    petalCount = 60;   // PC
+  }
 
-    // Posición horizontal aleatoria
-    const x = Math.random() * window.innerWidth;
-    flower.style.left = `${x}px`;
+  for (let i = 0; i < petalCount; i++) {
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+    document.body.appendChild(petal);
 
-    // Altura aleatoria
-    const height = 30 + Math.random() * 70;
-    flower.style.height = `${height}px`;
+    resetPetal(petal);
+  }
 
-    // Crear capullo
-    const bud = document.createElement("div");
-    bud.classList.add("bud");
-    bud.style.left = `${x + 2}px`; // centrar sobre el tallo
-    bud.style.bottom = `${height}px`; // en la punta del tallo
+  function resetPetal(petal) {
+    const size = 10 + Math.random() * 25;
+    const left = Math.random() * 100;
+    const duration = 6 + Math.random() * 6;
+    const delay = Math.random() * -duration; // empieza en distintos tiempos
 
-    // Animación aleatoria de inicio
-    bud.style.animationDelay = `${Math.random() * 3}s`;
+    petal.style.width = `${size}px`;
+    petal.style.height = `${size * 0.8}px`;
+    petal.style.left = `${left}vw`;
+    petal.style.animationDuration = `${duration}s`;
+    petal.style.animationDelay = `${delay}s`;
+  }
 
-    body.appendChild(flower);
-    body.appendChild(bud);
-}
+
+console.log("Script Funcionando✅")
