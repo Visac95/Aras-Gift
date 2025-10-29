@@ -35,7 +35,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--lilaPastel), var(--celestePastel));
+    background: linear-gradient(
+        135deg,
+        var(--lilaPastel),
+        var(--celestePastel)
+    );
     font-family: "Poppins", sans-serif;
     color: #444;
     overflow: hidden;
@@ -44,7 +48,7 @@ body {
 }
 
 .overlay {
-  position: fixed;
+    position: fixed;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 20px;
     padding: 40px;
@@ -94,11 +98,23 @@ button:hover {
 }
 
 
+#mensajeEspera {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    display: none;
+}
 
 /* Estilos para el fondo de flores */
 
-
-  .petal {
+.petal {
     position: absolute;
     top: -30px;
     width: 20px;
@@ -109,15 +125,15 @@ button:hover {
     transform: rotate(0deg);
     animation: fall linear infinite;
     z-index: -1;
-  }
+}
 
-  @keyframes fall {
+@keyframes fall {
     0% {
-      transform: translateY(-10vh) rotate(0deg);
-      opacity: 0.95;
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 0.95;
     }
     100% {
-      transform: translateY(110vh) rotate(720deg);
-      opacity: 0.5;
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0.5;
     }
-  }
+}
