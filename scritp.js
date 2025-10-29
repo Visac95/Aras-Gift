@@ -42,6 +42,7 @@ submitBtn.addEventListener("click", () => {
 });
 
 //Cambiar fondo con flores
+
 let petalCount;
 const width = window.innerWidth;
 
@@ -52,7 +53,7 @@ if (width < 600) {
 } else {
     petalCount = 60; // PC
 }
-
+function crearPetalos (){
 for (let i = 0; i < petalCount; i++) {
     const petal = document.createElement("div");
     petal.classList.add("petal");
@@ -60,7 +61,7 @@ for (let i = 0; i < petalCount; i++) {
 
     resetPetal(petal);
 }
-
+}
 function resetPetal(petal) {
     const size = 10 + Math.random() * 25;
     const left = Math.random() * 100;
@@ -76,6 +77,7 @@ function resetPetal(petal) {
 
 window.onload = () => {
   document.title = `Aun faltan ${remainingDays} días`
+  crearPetalos();
 };
 
 
