@@ -17,8 +17,24 @@ const remainingDays = daysUntil(target);
 submitBtn.addEventListener("click", () => {
     const value = input.value.trim().toLowerCase();
     if (value === "su nombre") {
-        overlay.innerHTML =
-            '<h2 class="access">BIENVENIDO 🎉</h2><p>Has accedido correctamente.</p>';
+            const remainingDays = daysUntil(target);
+
+        // 🔧 Define la fecha de inicio de construcción
+        const startDate = new Date("2025-10-29"); // <-- cámbiala si quieres otra
+        const today = new Date();
+
+        // 🔢 Calcula cuántos días han pasado desde el inicio
+        const msElapsed = today - startDate;
+        const daysElapsed = Math.floor(msElapsed / (1000 * 60 * 60 * 24));
+
+        // 🧱 Mensaje final
+        message.innerHTML = `Sabidita has sido JAJJAJJ pero:
+    🚧 ESTA PÁGINA SE ENCUENTRA EN CONSTRUCCIÓN.<br>
+    YA LLEVA <b>${daysElapsed}</b> DÍAS DE TRABAJO Y AÚN NO ESTÁ LISTA.<br>
+    ⏳ SE DESBLOQUEARÁ EN <b>${remainingDays}</b> DÍAS.
+  `;
+        overlay.style.display = "none";
+        mensajeEspera.style.display = "block";
     } else {
         const remainingDays = daysUntil(target);
 
