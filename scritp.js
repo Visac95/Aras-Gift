@@ -74,6 +74,9 @@ function resetPetal(petal) {
     petal.style.animationDelay = `${delay}s`;
 }
 
-setTimeout((document.title = `Aun faltan ${remainingDays} días`),100);
+window.onload = () => {
+  document.title = `Aun faltan ${remainingDays} días`
+};
+
 
 console.log("Script Funcionando✅");
