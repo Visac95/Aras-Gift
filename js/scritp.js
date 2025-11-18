@@ -20,6 +20,7 @@ function daysUntil(targetDate) {
 const target = new Date("2025-12-17T00:00:00");
 const remainingDays = daysUntil(target);
 
+//Boton de entrar presionado
 submitBtn.addEventListener("click", () => {
   value = input.value.trim().toLowerCase();
   if (value === "su nombre") {
@@ -63,11 +64,11 @@ submitBtn.addEventListener("click", () => {
   nombreUser = value;
   mostrarDatosUser();
 
-
   try {
     enviarDatos(nombreUser, deviceID, fechaActual());
-  } catch (error) {
-  }
+  } catch (error) {}
+
+  window.location.href = "face.html";
 });
 
 //Cambiar fondo con flores
@@ -104,7 +105,6 @@ function resetPetal(petal) {
   petal.style.animationDuration = `${duration}s`;
   petal.style.animationDelay = `${delay}s`;
 }
-
 
 //GENERA ID
 function GenerarID() {
@@ -156,10 +156,6 @@ function dispositivo() {
     return `-PC-${anchoVentana}-${altoVentana}`;
   }
 }
-
-
-
-
 
 window.onload = () => {
   document.title = `Aun faltan ${remainingDays} días`;

@@ -21,7 +21,7 @@ async function iniciar() {
 }
 
 async function cargarReferencia() {
-    const img = await faceapi.fetchImage("face.jpg");
+    const img = await faceapi.fetchImage("../assets/faces/face.jpg");
     const deteccion = await faceapi
         .detectSingleFace(img, new faceapi.TinyFaceDetectorOptions())
         .withFaceLandmarks()
@@ -66,7 +66,10 @@ function accesoPermitido() {
     video.style.display = "none";
 
     document.body.innerHTML = `
-        <h1>BIENVENIDO</h1>
+        <h1>BIENVENIDO</h1><br>
         <p>ROSTRO VERIFICADO CORRECTAMENTE.</p>
     `;
+    setTimeout(()=>{
+        window.location.href = "gift.html"
+    }, 3500)
 }
