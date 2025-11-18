@@ -2,10 +2,11 @@ const video = document.getElementById("video");
 const estado = document.getElementById("estado");
 
 Promise.all([
-    faceapi.nets.tinyFaceDetector.loadFromUri("https://cdn.jsdelivr.net/npm/face-api.js/weights"),
-    faceapi.nets.faceRecognitionNet.loadFromUri("https://cdn.jsdelivr.net/npm/face-api.js/weights"),
-    faceapi.nets.faceLandmark68Net.loadFromUri("https://cdn.jsdelivr.net/npm/face-api.js/weights")
+    faceapi.nets.tinyFaceDetector.loadFromUri("/weights"),
+    faceapi.nets.faceRecognitionNet.loadFromUri("/weights"),
+    faceapi.nets.faceLandmark68Net.loadFromUri("/weights")
 ]).then(iniciar);
+
 
 async function iniciar() {
     estado.innerText = "ACTIVANDO CAMARA...";
