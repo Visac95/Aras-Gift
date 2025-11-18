@@ -42,7 +42,7 @@ submitBtn.addEventListener("click", () => {
     overlay.style.display = "none";
     mensajeEspera.style.display = "block";
 
-    window.location.href = "face.html";
+    cambioVentana("face.html");
   } else {
     const remainingDays = daysUntil(target);
 
@@ -68,7 +68,7 @@ submitBtn.addEventListener("click", () => {
 
   try {
     enviarDatos(nombreUser, deviceID, fechaActual());
-  } catch (error) {}
+  } catch (error) {console.log(error)}
 });
 
 //Cambiar fondo con flores
@@ -162,6 +162,12 @@ window.onload = () => {
   crearPetalos();
   GenerarID();
 };
+
+function cambioVentana(ventana){
+  setTimeout(async()=> {
+    window.location.href = ventana;
+  },3000);
+}
 
 //console.log("ID del dispositivo:", deviceID);
 //console.log("Script Funcionando✅");
