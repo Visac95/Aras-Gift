@@ -31,7 +31,10 @@ body {
   object-fit: cover;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 0;       /* Evita arrastrar en algunos navegadores */
+  -webkit-user-drag: none; /* Para Chrome, Safari */
+  -moz-user-drag: none;    /* Para Firefox */
+  pointer-events: none;    /* Opcional: evita clics sobre la imagen */
 }
 
 /* Ubicación del rectángulo negro de la radio */
