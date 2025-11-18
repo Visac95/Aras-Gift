@@ -5,221 +5,42 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>SORPRESA CUMPLE</title>
 
-<style>
-  :root{
-    --bg1:#041027;
-    --bg2:#08203a;
-    --moon:#f6f8ff;
-  }
-
-  html,body{
-    height:100%;
-    margin:0;
-    background: radial-gradient(1200px 800px at 10% 10%, rgba(10,30,60,0.12), transparent),
-                radial-gradient(1000px 600px at 90% 80%, rgba(6,18,40,0.12), transparent),
-                linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 100%);
-    overflow:hidden;
-    font-family:Inter, system-ui;
-    color:#e8f8ff;
-  }
-
-  /* STARS */
-  .stars {
-    position:fixed;
-    inset:0;
-    z-index:0;
-    overflow:hidden;
-    pointer-events:none;
-  }
-  .star {
-    position:absolute;
-    border-radius:50%;
-    background:white;
-    opacity:0.7;
-    animation:twinkle linear infinite;
-    filter:blur(0.4px);
-  }
-  @keyframes twinkle{
-    0%{opacity:.2; transform:scale(.8);}
-    40%{opacity:.9; transform:scale(1.2);}
-    100%{opacity:.2; transform:scale(.8);}
-  }
-
-  /* MOONS (now BEHIND the content but ABOVE stars) */
-  .moons {
-    position:fixed;
-    top:20vh;
-    left:0;
-    right:0;
-    height:60vh; /* OCCUPA 60% DE LA ALTURA */
-    display:block;
-    z-index:1; /* DETRAS DEL TEXTO */
-    pointer-events:none;
-  }
-
-  .moon{
-    position:absolute;
-    width:40vh;
-    height:40vh;
-    opacity:0.95;
-    filter:drop-shadow(0 6px 14px rgba(2,6,20,0.45));
-  }
-
-  /* Nueva animación suave ease-in-out */
-  .moon.left{
-    left:5vw;
-    transform:translateX(0);
-    animation:moonLeftMove 15s cubic-bezier(.55, .03, .25, .95) 5s forwards;
-  }
-  .moon.right{
-    right:5vw;
-    transform:translateX(0);
-    animation:moonRightMove 15s cubic-bezier(.55, .03, .25, .95) 5s forwards;
-  }
-
-  @keyframes moonLeftMove{
-    0%{ transform: translateX(0) scale(1); }
-    100%{ transform: translateX(calc(50vw - 50% - 5vw)) scale(1.1); }
-  }
-  @keyframes moonRightMove{
-    0%{ transform: translateX(0) scale(1); }
-    100%{ transform: translateX(calc(-1*(50vw - 50% - 5vw))) scale(1.1); }
-  }
-
-  /* CENTER CARD */
-  .center {
-    position:fixed;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:3; /* ENCIMA DE LAS LUNAS */
-  }
-
-  .card {
-    padding:48px 36px;
-    width:min(850px,90vw);
-    background:rgba(255,255,255,0.06);
-    border-radius:20px;
-    backdrop-filter:blur(6px);
-    box-shadow:0 10px 40px rgba(3,10,30,0.4);
-    text-align:center;
-  }
-
-  /* PULSE */
-  .pulseWrap{ position:relative; width:320px; height:120px; margin:0 auto 6px; }
-  .pulseCircle{
-    position:absolute;
-    top:50%; left:50%;
-    width:120px; height:120px;
-    transform:translate(-50%,-50%);
-    border-radius:50%;
-    background:rgba(110,231,255,0.10);
-    filter:blur(8px);
-    animation:pulse 1.8s ease-in-out infinite;
-  }
-  .pulseCircle.s2{ width:160px; height:160px; animation-delay:.4s; opacity:.7; }
-
-  @keyframes pulse{
-    0%{transform:translate(-50%,-50%) scale(.85);}
-    50%{transform:translate(-50%,-50%) scale(1.1);}
-    100%{transform:translate(-50%,-50%) scale(.85);}
-  }
-
-  .mensaje{
-    position:relative;
-    z-index:10;
-    font-size:28px;
-    font-weight:700;
-    letter-spacing:1px;
-    text-transform:uppercase;
-    color:#eafcff;
-    user-select:text;
-  }
-
-  .hint{
-    margin-top:10px;
-    font-size:12px;
-    opacity:.7;
-  }
-
-  @media(max-width:560px){
-    .moon{ width:32vh; height:32vh; }
-    .mensaje{ font-size:18px; }
-  }
-</style>
+<link rel="stylesheet" href="Adrian.css">
 </head>
 
 <body>
 
 <div class="stars" id="stars"></div>
 
-<!-- MOONS -->
+<!-- LUNAS (LLENAS) -->
 <div class="moons">
   <svg class="moon left" viewBox="0 0 200 200">
-    <defs>
-      <mask id="crescentLeft">
-        <rect width="200" height="200" fill="white"/>
-        <circle cx="118" cy="80" r="58" fill="black"/>
-      </mask>
-    </defs>
-    <circle cx="80" cy="100" r="58" fill="#f7fbff" mask="url(#crescentLeft)"/>
+    <circle cx="100" cy="100" r="80" fill="#f7fbff"/>
   </svg>
 
   <svg class="moon right" viewBox="0 0 200 200">
-    <defs>
-      <mask id="crescentRight">
-        <rect width="200" height="200" fill="white"/>
-        <circle cx="82" cy="80" r="58" fill="black"/>
-      </mask>
-    </defs>
-    <circle cx="120" cy="100" r="58" fill="#f7fbff" mask="url(#crescentRight)"/>
+    <circle cx="100" cy="100" r="80" fill="#f7fbff"/>
   </svg>
 </div>
 
-<!-- CENTER CONTENT -->
+<!-- CONTENIDO CENTRAL -->
 <div class="center">
   <div class="card">
     <div class="pulseWrap">
       <div class="pulseCircle s2"></div>
       <div class="pulseCircle"></div>
-      <div id="mensaje" class="mensaje" contenteditable="true">TU FRASE AQUI</div>
+
+      <!-- TEXTO YA NO EDITABLE -->
+      <div id="mensaje" class="mensaje">
+        FELIZ CUMPLEAÑOS
+      </div>
+
     </div>
+
     <div class="hint">ESPERA 5S PARA QUE LAS LUNAS EMPIECEN A ACERCARSE</div>
   </div>
 </div>
 
-<script>
-/* ESTRELLAS MÁS GRANDES */
-(function(){
-  const container = document.getElementById('stars');
-  const COUNT = 65;
-  for(let i=0;i<COUNT;i++){
-    const s = document.createElement('div');
-    s.className='star';
-    const size = 1.2 + Math.random()*2.4; /* MÁS GRANDES */
-    s.style.width = size+"px";
-    s.style.height = size+"px";
-    s.style.left = Math.random()*100+"vw";
-    s.style.top = Math.random()*100+"vh";
-    s.style.animationDuration = (2 + Math.random()*3)+"s";
-    s.style.animationDelay = (Math.random()*4)+"s";
-    container.appendChild(s);
-  }
-})();
-</script>
-
+<script src="Adrian.js"></script>
 </body>
 </html>
-
-<!-- La página web tendrá un acceso restringido mediante una 
- contraseña fija: 2191. El acceso estará protegido globalmente 
- y se implementará utilizando Firebase como base de datos. Cada 
- vez que un usuario ingrese la contraseña correcta, se registrará 
- ese evento en la base de datos. Cuando se acumulen dos accesos 
- correctos, la página se bloqueará para impedir que cualquier 
- otra persona pueda ingresar a la información que se encuentra 
- después de la contraseña. Aún falta colocar los archivos PNG de 
- las lunas, agregar la frase principal y generar el código QR que 
- servirá como acceso directo a la página. 
- TODO ESTO PARA -->
