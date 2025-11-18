@@ -6,16 +6,16 @@ let audioContext;
 let analyser;
 let dataArray;
 
-// Espera a que cargue todo
-window.addEventListener("load", () => {
-    // Intento de reproducción automática
-    audio.play().catch(() => {
-        console.log("Esperando interacción del usuario para iniciar el audio.");
-    });
 
-    // Cargar barras de ecualizador
-    iniciarEqualizer();
+// ===============================
+// INICIO SEGURO (SIN AUTOPLAY)
+// ===============================
+window.addEventListener("load", () => {
+    audio.pause();          // aseguro que NO suene
+    audio.currentTime = 0;  // siempre empieza desde el inicio
+    iniciarEqualizer();     // solo crea las barras
 });
+
 
 // ===============================
 // ACTIVAR AUDIOCONTEXT CUANDO EL USUARIO TOQUE LA PANTALLA
@@ -69,21 +69,35 @@ function animarEqualizer() {
     analyser.getByteFrequencyData(dataArray);
     const bars = document.querySelectorAll(".bar");
 
-    const slice = Math.floor(dataArray.length / bars.length);
+    // Evitar que use frecuencias muy altas (que no tienen energía)
+    const maxUsableFreq = Math.floor(dataArray.length * 0.65); 
+    const slice = Math.floor(maxUsableFreq / bars.length);
 
     bars.forEach((bar, i) => {
         let sum = 0;
-        for (let j = 0; j < slice; j++) {
-            sum += dataArray[i * slice + j];
-        }
-        let avg = sum / slice;
-        let height = (avg / 255) * 100;
 
-        bar.style.height = `${20 + height}px`;
+        // promediamos la parte útil del espectro
+        for (let j = 0; j < slice; j++) {
+            const index = i * slice + j;
+            if (index < maxUsableFreq) {
+                sum += dataArray[index];
+            }
+        }
+
+        let avg = sum / slice;
+
+        // BOOST SUAVE para que todas las barras se muevan
+        avg = avg * 1.4; // impulso del 40%
+
+        // límite y mapeo a altura visual
+        let height = Math.min((avg / 255) * 180, 180);
+
+        bar.style.height = `${10 + height}px`;
     });
 
     requestAnimationFrame(animarEqualizer);
 }
+
 
 
 const startScreen = document.getElementById("start-screen");
@@ -120,5 +134,7 @@ document.addEventListener("click", async () => {
     // Si está sonando → pausa
     else {
         audio.pause();
+        document.getElementById("pause-hintid").style.display = "none";
     }
 });
+

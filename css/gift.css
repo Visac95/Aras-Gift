@@ -39,12 +39,12 @@ body {
   position: absolute;
 
   /* Ajusta EXACTAMENTE A TU IMAGEN */
-  top: 52%; /* Ajustado para tu PNG */
-  left: 61.5%;
-  transform: translateX(-50%);
+  top: 50%; /* Ajustado para tu PNG */
+  left: 52%;
+  /* transform: translateX(-50%); */
 
-  width: 290px; /* Ancho del rectángulo */
-  height: 140px; /* Alto del rectángulo */
+  width: 18%; /* Ancho del rectángulo */
+  height: 18%; /* Alto del rectángulo */
 
   display: flex;
   align-items: center;
@@ -63,4 +63,23 @@ body {
 
   /* Suavidad */
   transition: height 0.05s linear;
+}
+.pause-hint {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.1); /* translúcido claro */
+  color: #1a1a1a;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  backdrop-filter: blur(8px); /* glass suave */
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2); /* borde suave tipo vidrio */
+  user-select: none;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* sombrita elegante */
 }
