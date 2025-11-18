@@ -1,135 +1,66 @@
-/* CSS/GIF.CSS - ESTILOS Y ANIMACIONES (SIMPLEMENTE LIGERAS) */
-:root{
-  --duration-sun: 9s;        /* DURACION DEL SOL (ATARDecer) */
-  --duration-sky: 9s;
-  --duration-radio: 2.2s;    /* PULSACION RADIO */
-}
-
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#0f0f0f;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-  color:#fff;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-}
-
-.stage{
-  width: 100%;
-  max-width: 1100px;
-  background: #000;
+body {
+  margin: 0;
   padding: 0;
-  margin: 0 auto;
-  border-radius: 16px;
   overflow: hidden;
+  background: #000;
+}
+#start-screen {
+  position: fixed;
+  inset: 0;
+  background: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  font-family: sans-serif;
+  z-index: 9999;
+  cursor: pointer;
 }
 
-
-.scene-wrap{
-  background:linear-gradient(#111 0%, #0b0b0b 100%);
-  border-radius:10px;
-  padding:8px;
-  box-shadow:0 10px 40px rgba(0,0,0,0.6);
-  overflow:hidden;
+.scene {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
 }
 
-/* SVG TOMA TODO EL ANCHO */
-#scene{width:100%;height:auto;display:block}
-
-/* ANIMACION DEL SOL (BAJADA) */
-#sunGroup {
-  transform-origin: 760px 180px;
-  animation: sunDrop var(--duration-sun) linear forwards;
-  animation-play-state: paused;
+.background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-/* CAMBIO GRADIENTE CIELO (TOP y BOTTOM) - ANIMABLE VIA CSS */
-#stopTop, #stopBottom {
-  animation-play-state: paused;
-}
-#stopTop { animation: skyTop var(--duration-sky) linear forwards; }
-#stopBottom { animation: skyBottom var(--duration-sky) linear forwards; }
+/* Ubicación del rectángulo negro de la radio */
+#equalizer {
+  position: absolute;
 
-/* PULSACION DEL INDICADOR Y RADIO (SUAVE) */
-#radio {
-  transform-origin: center center;
-  animation: radioBreathe var(--duration-radio) ease-in-out infinite;
-  animation-play-state: paused;
-}
+  /* Ajusta EXACTAMENTE A TU IMAGEN */
+  top: 52%; /* Ajustado para tu PNG */
+  left: 61.5%;
+  transform: translateX(-50%);
 
-#indicator {
-  transform-origin: 60px -30px;
-  animation: indicatorBlink 1.6s ease-in-out infinite;
-  animation-play-state: paused;
-}
+  width: 290px; /* Ancho del rectángulo */
+  height: 140px; /* Alto del rectángulo */
 
-/* PEQUEÑA OSCILACION DE LA MESA (PARA VIDA) */
-#table {
-  transform-origin: 500px 450px;
-  animation: tableFloat 14s ease-in-out infinite;
-  animation-play-state: paused;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+
+  /* Debug (puedes borrar esta línea si quieres) */
+  /* background: rgba(255,0,0,0.1); */
 }
 
-/* DUST MOVEMENT SUBTIL (SIMPLE, LIGERO) */
-#dust .d {
-  animation: floatDust 10s linear infinite;
-  animation-play-state: paused;
-}
+.bar {
+  width: 14px;
+  background: #7df9ff; /* color cyan neon */
+  border-radius: 4px;
+  height: 20px;
 
-/* CONTROLES */
-.controls{display:flex;gap:10px;justify-content:center;padding:12px}
-.controls button{
-  padding:10px 14px;border-radius:8px;border:0;background:#222;color:#fff;font-weight:600;
-  cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,0.5);
-}
-.controls button:active{transform:translateY(1px)}
-
-/* KEYFRAMES */
-@keyframes sunDrop {
-  0% { transform: translateY(0) scale(1); opacity:1; }
-  80% { transform: translateY(170px) scale(1.05); opacity:1; }
-  100% { transform: translateY(220px) scale(0.95); opacity:0.95; }
-}
-
-@keyframes skyTop {
-  0% { stop-color: #87CEEB; }   /* azul dia */
-  100% { stop-color: #2b2b55; } /* morado atardecer */
-}
-@keyframes skyBottom {
-  0% { stop-color: #FFD2A6; }   /* warm dia */
-  100% { stop-color: #FF6E4A; } /* naranja intenso */
-}
-
-@keyframes radioBreathe {
-  0% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-4px) scale(1.007); }
-  100% { transform: translateY(0) scale(1); }
-}
-
-@keyframes indicatorBlink {
-  0% { opacity: 0; transform: scale(0.9); }
-  10% { opacity: 1; transform: scale(1.15); }
-  50% { opacity: 0.25; transform: scale(1); }
-  100% { opacity: 0; transform: scale(0.9); }
-}
-
-@keyframes tableFloat {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-  100% { transform: translateY(0); }
-}
-
-@keyframes floatDust {
-  0% { transform: translateY(0) translateX(0); opacity:0.6; }
-  50% { transform: translateY(-18px) translateX(12px); opacity:0.14; }
-  100% { transform: translateY(0) translateX(0); opacity:0.6; }
-}
-
-/* ESTILOS RESPONSIVOS SIMPLES */
-@media (max-width:640px){
-  .controls button{padding:8px 10px;font-size:13px}
+  /* Suavidad */
+  transition: height 0.05s linear;
 }

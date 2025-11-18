@@ -41,6 +41,8 @@ submitBtn.addEventListener("click", () => {
   `;
     overlay.style.display = "none";
     mensajeEspera.style.display = "block";
+
+    window.location.href = "face.html";
   } else {
     const remainingDays = daysUntil(target);
 
@@ -67,8 +69,6 @@ submitBtn.addEventListener("click", () => {
   try {
     enviarDatos(nombreUser, deviceID, fechaActual());
   } catch (error) {}
-
-  window.location.href = "face.html";
 });
 
 //Cambiar fondo con flores

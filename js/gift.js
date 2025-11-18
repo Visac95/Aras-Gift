@@ -1,75 +1,124 @@
-// JS/GIF.JS - CONTROL LIGERO DE LA ANIMACION
-// SE INICIA ANIMACION AL PRESIONAR 'INICIAR ANIMACION'.
-// TAMBIEN PERMITE REINICIAR.
+// ===============================
+// AUTO-REPRODUCCIÓN DEL AUDIO
+// ===============================
+const audio = document.getElementById("audio");
+let audioContext;
+let analyser;
+let dataArray;
 
-// EVITAR EJECUCIONES PESADAS: SOLO TOGGLING DE ANIMACIONES CSS
-document.addEventListener('DOMContentLoaded', function () {
-  const startBtn = document.getElementById('startBtn');
-  const resetBtn = document.getElementById('resetBtn');
-
-  // ELEMENTOS ANIMABLES (SE USAN PARA CAMBIAR ANIMATION-PLAY-STATE)
-  const sun = document.getElementById('sunGroup');
-  const stopTop = document.getElementById('stopTop');
-  const stopBottom = document.getElementById('stopBottom');
-  const radio = document.getElementById('radio');
-  const indicator = document.getElementById('indicator');
-  const table = document.getElementById('table');
-  const dust = document.querySelectorAll('#dust .d');
-
-  // DURACION EN MS PARA REINICIO AUTOMATICO OPCIONAL
-  const DURATION_MS = 9000; // COINCIDE CON --duration-sun
-
-  function playAnimations() {
-    // PONER ANIMACIONES EN PLAY
-    [sun, stopTop, stopBottom, radio, indicator, table, ...dust].forEach(el => {
-      if (!el) return;
-      el.style.animationPlayState = 'running';
+// Espera a que cargue todo
+window.addEventListener("load", () => {
+    // Intento de reproducción automática
+    audio.play().catch(() => {
+        console.log("Esperando interacción del usuario para iniciar el audio.");
     });
 
-    // OPCIONAL: AL FINAL DE ANIMACION, DEJAR RADIO EN PULSACION SUAVE
-    clearTimeout(playAnimations._t);
-    playAnimations._t = setTimeout(() => {
-      // DEJAR RADIO EN PULSACION (ya esta infinito)
-      // SI QUIERES QUE HAGA ALGO AL FINAL, AGREGALO AQUI
-    }, DURATION_MS + 200);
-  }
+    // Cargar barras de ecualizador
+    iniciarEqualizer();
+});
 
-  function stopAnimations() {
-    // PAUSAR y REINICIAR (el reinicio real se hace forzando reflow)
-    [sun, stopTop, stopBottom, radio, indicator, table, ...dust].forEach(el => {
-      if (!el) return;
-      el.style.animationPlayState = 'paused';
+// ===============================
+// ACTIVAR AUDIOCONTEXT CUANDO EL USUARIO TOQUE LA PANTALLA
+// ===============================
+window.addEventListener("click", iniciarAnalizadorSiNoExiste);
+window.addEventListener("touchstart", iniciarAnalizadorSiNoExiste);
+
+function iniciarAnalizadorSiNoExiste() {
+    if (audioContext) return; // ya está iniciado
+
+    iniciarAnalizadorDeAudio(audio);
+    console.log("AudioContext ACTIVADO");
+}
+// ===============================
+// CREAR BARRAS DEL ECUALIZADOR
+// ===============================
+function iniciarEqualizer() {
+    const cont = document.getElementById("equalizer");
+    for (let i = 0; i < 12; i++) {
+        const b = document.createElement("div");
+        b.classList.add("bar");
+        cont.appendChild(b);
+    }
+}
+
+// ===============================
+// ANALIZADOR DE AUDIO
+// ===============================
+function iniciarAnalizadorDeAudio(audioElement) {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    audioContext = new AudioCtx();
+
+    const source = audioContext.createMediaElementSource(audioElement);
+    analyser = audioContext.createAnalyser();
+    analyser.fftSize = 256;
+
+    dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+    source.connect(analyser);
+    analyser.connect(audioContext.destination);
+
+    animarEqualizer();
+}
+
+// ===============================
+// ANIMACIÓN DEL ECUALIZADOR
+// ===============================
+function animarEqualizer() {
+    if (!analyser) return;
+
+    analyser.getByteFrequencyData(dataArray);
+    const bars = document.querySelectorAll(".bar");
+
+    const slice = Math.floor(dataArray.length / bars.length);
+
+    bars.forEach((bar, i) => {
+        let sum = 0;
+        for (let j = 0; j < slice; j++) {
+            sum += dataArray[i * slice + j];
+        }
+        let avg = sum / slice;
+        let height = (avg / 255) * 100;
+
+        bar.style.height = `${20 + height}px`;
     });
-  }
 
-  function resetAnimations() {
-    // PAUSA
-    stopAnimations();
+    requestAnimationFrame(animarEqualizer);
+}
 
-    // REINICIAR FORZANDO REMOVER Y VOLVER A AÑADIR LA CLASE DE ANIMACION
-    // Pero como usamo CSS animations en inline style, hacemos reflow para reiniciar
-    const nodes = [sun, stopTop, stopBottom, radio, indicator, table, ...dust].filter(Boolean);
-    nodes.forEach(el => {
-      // Elimina inline style que pone 'running' o 'paused'
-      el.style.animationPlayState = 'paused';
-      // REPAINT HACK: leer offsetHeight para forzar reflow
-      void el.offsetHeight;
-      // dejar pausado hasta que el usuario presione iniciar
-    });
-  }
 
-  // BOTONES
-  startBtn.addEventListener('click', () => {
-    playAnimations();
-  });
+const startScreen = document.getElementById("start-screen");
+let audioStartedOnce = false;
 
-  resetBtn.addEventListener('click', () => {
-    resetAnimations();
-  });
+// Evitar que el audio inicie solo
+audio.pause();
+audio.currentTime = 0;
 
-  // INICIO: dejar animaciones en pausa hasta que el usuario presione iniciar
-  resetAnimations();
+// Al tocar cualquier parte de la pantalla
+document.addEventListener("click", async () => {
 
-  // OPCIONAL: INICIAR AUTOMATICO SI QUIERES (DESCOMENTAR)
-  // playAnimations();
+    // Si es la primera vez → quitar pantalla negra
+    if (!audioStartedOnce) {
+        audioStartedOnce = true;
+
+        startScreen.style.opacity = "0";
+        setTimeout(() => {
+            startScreen.style.display = "none";
+        }, 400);
+
+        // Iniciar animación
+        animarEqualizer();
+    }
+
+    // Toggle: si está pausado → reproduce
+    if (audio.paused) {
+        try {
+            await audio.play();
+        } catch (e) {
+            console.log("Interacción requerida por el navegador.");
+        }
+    } 
+    // Si está sonando → pausa
+    else {
+        audio.pause();
+    }
 });
