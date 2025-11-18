@@ -21,7 +21,7 @@ async function iniciar() {
 }
 
 async function cargarReferencia() {
-    const img = await faceapi.fetchImage("../assets/faces/face.jpg");
+    const img = await faceapi.fetchImage("/../assets/faces/face.jpg");
     const deteccion = await faceapi
         .detectSingleFace(img, new faceapi.TinyFaceDetectorOptions())
         .withFaceLandmarks()
