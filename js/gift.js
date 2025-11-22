@@ -177,5 +177,5 @@ audio.addEventListener("ended", () => {
         .then(() => console.log("Reproduciendo segunda canción..."))
         .catch((e) => console.error("Error al reproducir:", e));
     }
-  }, 4000); // Espera de 2 segundos antes de cambiar o redirigir
+  }, 3000); // Espera de 2 segundos antes de cambiar o redirigir
 });
