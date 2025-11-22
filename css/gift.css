@@ -15,7 +15,7 @@ body {
   font-size: 2rem;
   letter-spacing: 2px;
   font-family: sans-serif;
-  z-index: 9999;
+  z-index: 10;
   cursor: pointer;
 }
 
@@ -31,10 +31,11 @@ body {
   object-fit: cover;
   position: absolute;
   top: 0;
-  left: 0;       /* Evita arrastrar en algunos navegadores */
+  left: 0; /* Evita arrastrar en algunos navegadores */
   -webkit-user-drag: none; /* Para Chrome, Safari */
-  -moz-user-drag: none;    /* Para Firefox */
-  pointer-events: none;    /* Opcional: evita clics sobre la imagen */
+  -moz-user-drag: none; /* Para Firefox */
+  pointer-events: none; /* Opcional: evita clics sobre la imagen */
+  z-index: -1;
 }
 
 /* Ubicación del rectángulo negro de la radio */
@@ -88,17 +89,29 @@ body {
 }
 
 .home-icon {
-  position: fixed;       /* Siempre en la pantalla */
-  bottom: 20px;          /* Distancia desde abajo */
-  right: 20px;           /* Distancia desde la derecha (cambiar a left: 20px; si quieres izquierda) */
-  font-size: 40px;       /* Tamaño del icono */
-  text-decoration: none;  /* Quita subrayado */
-  color: white;           /* Color del icono */
-  z-index: 9999;          /* Por encima de todo */
+  position: fixed; /* Siempre en la pantalla */
+  bottom: 20px; /* Distancia desde abajo */
+  right: 20px; /* Distancia desde la derecha (cambiar a left: 20px; si quieres izquierda) */
+  font-size: 40px; /* Tamaño del icono */
+  text-decoration: none; /* Quita subrayado */
+  color: white; /* Color del icono */
+  z-index: 9999; /* Por encima de todo */
   cursor: pointer;
-  user-select: none;      /* No se selecciona al arrastrar */
+  user-select: none; /* No se selecciona al arrastrar */
 }
 .home-icon:hover {
   transform: scale(1.2); /* Efecto al pasar mouse */
   transition: transform 0.2s;
+}
+.subs {
+  position: fixed; /* Fija la posición respecto a la pantalla, no al flujo del HTML */
+  bottom: 50px; /* Lo ubica en la parte inferior */
+  left: 50%; /* Lo centra horizontalmente */
+  transform: translateX(
+    -50%
+  ); /* Corrección necesaria para el centrado exacto */
+  z-index: 9999; /* EL NÚMERO MÁGICO: Asegura que esté por encima de TODO (fondo, canvas, video) */
+  width: 80%; /* Para que el texto no sea muy ancho */
+  text-align: center;
+  pointer-events: none; /* Importante: permite que puedas hacer clic a través del texto (pausar el audio, etc.) */
 }

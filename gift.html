@@ -5,7 +5,10 @@
     <title>Happy Birthday</title>
     <link rel="stylesheet" href="./css/gift.css" />
     <link rel="icon" type="image/png" href="assets/logo.png" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
   </head>
   <body>
     <div class="scene">
@@ -28,9 +31,30 @@
       <i class="fas fa-home"></i>
     </a>
 
-    <audio id="audio" src="./audio/Presentacion.mp3"></audio>
+    <!-- <audio id="audio" src="./audio/Presentacion.mp3"></audio> -->
+    <audio
+      id="audio"
+      controls
+      src="./audio/Presentacion.mp3"
+      crossorigin="anonymous"
+    >
+      <track
+        id="track"
+        kind="captions"
+        label="Español"
+        srclang="es"
+        src="./assets/presentacion-subs.vtt"
+        default
+      />
+      Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <div class="subs">
+      <p id="contenedor-subtitulos"></p>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="./js/gift.js"></script>
+    <script src="./js/subtitles.js"></script>
   </body>
 </html>
