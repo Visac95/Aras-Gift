@@ -71,7 +71,7 @@ body {
 .pause-hint {
   position: absolute;
   bottom: 20px;
-  left: 50%;
+  left: 15%;
   transform: translateX(-50%);
   background: rgba(255, 255, 255, 0.1); /* translúcido claro */
   color: #1a1a1a;
@@ -103,15 +103,29 @@ body {
   transform: scale(1.2); /* Efecto al pasar mouse */
   transition: transform 0.2s;
 }
+#contenedor-subtitulos {
+    color: white;
+    font-family: sans-serif;
+    margin: 0;
+    font-size: 1.2rem;
+}
 .subs {
   position: fixed; /* Fija la posición respecto a la pantalla, no al flujo del HTML */
-  bottom: 50px; /* Lo ubica en la parte inferior */
+  bottom: 20px; /* Lo ubica en la parte inferior */
   left: 50%; /* Lo centra horizontalmente */
   transform: translateX(
     -50%
   ); /* Corrección necesaria para el centrado exacto */
-  z-index: 9999; /* EL NÚMERO MÁGICO: Asegura que esté por encima de TODO (fondo, canvas, video) */
-  width: 80%; /* Para que el texto no sea muy ancho */
+  z-index: 9999; /* Para que el texto no sea muy ancho */
   text-align: center;
   pointer-events: none; /* Importante: permite que puedas hacer clic a través del texto (pausar el audio, etc.) */
+  stroke: 5px white;
+  stroke: unset;
+  color: #ffffff; /* Texto blanco */
+  font-family: "Arial", sans-serif;
+  font-size: 24px; /* Tamaño grande */
+  font-weight: bold;
+  text-align: center;
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
+    2px 2px 0 #000, 0px 4px 10px rgba(0, 0, 0, 0.8);
 }
