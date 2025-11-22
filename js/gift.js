@@ -25,7 +25,7 @@ function iniciarAnalizadorSiNoExiste() {
   if (audioContext) return; // ya está iniciado
 
   iniciarAnalizadorDeAudio(audio);
-  console.log("AudioContext ACTIVADO");
+  //console.log("AudioContext ACTIVADO");
 }
 // ===============================
 // CREAR BARRAS DEL ECUALIZADOR
@@ -136,16 +136,18 @@ document.addEventListener("click", async () => {
 // ===============================
 // CONTROL DE CAMBIO DE AUDIO Y REDIRECCIÓN
 // ===============================
+
+const nombreSegundaCancion = "Una-Flor-Samuel-Ararat";
+
+// Rutas de los archivos
+const nuevoAudio = "../audio/Una-Flor-Samuel-Ararat.mp3";
+const nuevosSubs = "../assets/una-flor-fl-sub.vtt";
+
 audio.addEventListener("ended", () => {
   console.log("Audio terminado. Analizando siguiente paso...");
 
   // CONFIGURACIÓN:
   // Pon aquí la parte única del nombre de tu segundo archivo
-  const nombreSegundaCancion = "Una-Flor-Samuel-Ararat";
-
-  // Rutas de los archivos
-  const nuevoAudio = "../audio/Una-Flor-Samuel-Ararat.mp3";
-  const nuevosSubs = "../assets/una-flor-fl-sub.vtt";
 
   setTimeout(() => {
     // === VERIFICACIÓN ===

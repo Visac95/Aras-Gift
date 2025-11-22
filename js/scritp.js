@@ -166,7 +166,7 @@ window.onload = () => {
 function cambioVentana(ventana){
   setTimeout(async()=> {
     window.location.href = ventana;
-  },3000);
+  },5000);
 }
 
 //console.log("ID del dispositivo:", deviceID);

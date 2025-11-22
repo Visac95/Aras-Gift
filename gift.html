@@ -38,6 +38,7 @@
       src="./audio/Presentacion.mp3"
       crossorigin="anonymous"
     >
+      <!-- src="./audio/Presentacion.mp3" -->
       <track
         id="track"
         kind="captions"
@@ -46,6 +47,7 @@
         src="./assets/presentacion-subs.vtt"
         default
       />
+      <!-- src="./assets/presentacion-subs.vtt" -->
       Tu navegador no soporta el elemento de audio.
     </audio>
 
@@ -53,8 +55,16 @@
       <p id="contenedor-subtitulos"></p>
     </div>
 
+    <div id="overlay-especial">
+      <div id="caja-texto">
+        <div class="contenido-centrado">
+          <h2 id="texto-especial"></h2>
+        </div>
+      </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="./js/gift.js"></script>
     <script src="./js/subtitles.js"></script>
+    <script src="./js/overlay.js"></script>
   </body>
 </html>
