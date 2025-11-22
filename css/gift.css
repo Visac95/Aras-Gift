@@ -103,12 +103,7 @@ body {
   transform: scale(1.2); /* Efecto al pasar mouse */
   transition: transform 0.2s;
 }
-#contenedor-subtitulos {
-    color: white;
-    font-family: sans-serif;
-    margin: 0;
-    font-size: 1.2rem;
-}
+
 .subs {
   position: fixed; /* Fija la posición respecto a la pantalla, no al flujo del HTML */
   bottom: 20px; /* Lo ubica en la parte inferior */
@@ -123,7 +118,7 @@ body {
   stroke: unset;
   color: #ffffff; /* Texto blanco */
   font-family: "Arial", sans-serif;
-  font-size: 24px; /* Tamaño grande */
+  font-size: 22px; /* Tamaño grande */
   font-weight: bold;
   text-align: center;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,

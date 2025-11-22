@@ -88,9 +88,9 @@ function animarEqualizer() {
     avg = avg * 1.4; // impulso del 40%
 
     // límite y mapeo a altura visual
-    let height = Math.min((avg / 255) * 180, 180);
+    let height = Math.min((avg / 255) * 170, 170);
 
-    bar.style.height = `${10 + height}px`;
+    bar.style.height = `${5 + height}px`;
   });
 
   requestAnimationFrame(animarEqualizer);
@@ -133,4 +133,45 @@ document.addEventListener("click", async () => {
   }
 });
 
+// ===============================
+// CAMBIO AUTOMÁTICO DE AUDIO Y SUBS
+// ===============================
+audio.addEventListener("ended", () => {
+  console.log("Audio terminado. Esperando 2 segundos para el siguiente...");
 
+  setTimeout(() => {
+    // 1. Definir las nuevas rutas (CAMBIA ESTO POR TUS ARCHIVOS REALES)
+    const nuevoAudio = "../audio/Una Flor-Samuel Ararat.mp3";
+    const nuevosSubs = "../assets/una-flor-fl-sub.vtt";
+
+    // 2. Reemplazar la fuente del audio
+    audio.src = nuevoAudio;
+
+    // 3. Reemplazar la fuente de los subtítulos
+    // Buscamos el elemento <track> dentro del audio/video
+    const trackElement = document.getElementById("track");
+    if (trackElement) {
+      trackElement.src = nuevosSubs;
+    }
+
+    // 4. Cargar los nuevos recursos
+    // .load() es vital para que el navegador procese el cambio de src
+    audio.load();
+
+    // 5. Reproducir el nuevo audio
+    // Como el usuario ya interactuó antes con la página, el navegador permitirá el play()
+    audio
+      .play()
+      .then(() => {
+        console.log("Segunda canción reproduciéndose");
+        // Si tu sistema de subtítulos necesita reiniciarse, el evento 'load'
+        // del track debería dispararse automáticamente al cargar el nuevo src.
+      })
+      .catch((error) => {
+        console.error(
+          "Error al intentar reproducir el siguiente audio:",
+          error
+        );
+      });
+  }, 2000); // 2000 milisegundos = 2 segundos de espera
+});
