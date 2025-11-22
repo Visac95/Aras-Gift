@@ -14,7 +14,6 @@
       var cue = this.activeCues[0]; // Obtener el subtítulo actual
       if (cue) {
         subtitleDiv.innerHTML = cue.text;
-        console.log(cue.text)
       } else {
         subtitleDiv.innerText = ''; // Limpiar si no hay subtítulo
       }

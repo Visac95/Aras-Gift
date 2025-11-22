@@ -90,7 +90,7 @@ function animarEqualizer() {
     // límite y mapeo a altura visual
     let height = Math.min((avg / 255) * 170, 170);
 
-    bar.style.height = `${5 + height}px`;
+    bar.style.height = `${7 + height}px`;
   });
 
   requestAnimationFrame(animarEqualizer);
@@ -134,44 +134,46 @@ document.addEventListener("click", async () => {
 });
 
 // ===============================
-// CAMBIO AUTOMÁTICO DE AUDIO Y SUBS
+// CONTROL DE CAMBIO DE AUDIO Y REDIRECCIÓN
 // ===============================
 audio.addEventListener("ended", () => {
-  console.log("Audio terminado. Esperando 2 segundos para el siguiente...");
+  console.log("Audio terminado. Analizando siguiente paso...");
+
+  // CONFIGURACIÓN:
+  // Pon aquí la parte única del nombre de tu segundo archivo
+  const nombreSegundaCancion = "Una-Flor-Samuel-Ararat";
+
+  // Rutas de los archivos
+  const nuevoAudio = "../audio/Una-Flor-Samuel-Ararat.mp3";
+  const nuevosSubs = "../assets/una-flor-fl-sub.vtt";
 
   setTimeout(() => {
-    // 1. Definir las nuevas rutas (CAMBIA ESTO POR TUS ARCHIVOS REALES)
-    const nuevoAudio = "../audio/Una Flor-Samuel Ararat.mp3";
-    const nuevosSubs = "../assets/una-flor-fl-sub.vtt";
+    // === VERIFICACIÓN ===
+    // ¿El audio que acaba de terminar contenía el nombre de la segunda canción?
+    if (audio.src.includes(nombreSegundaCancion)) {
+      console.log("Segunda canción finalizada. Redirigiendo al inicio...");
+      window.location.href = "index.html";
+    } else {
+      // Si NO era la segunda, asumimos que era la primera y hacemos el cambio
+      console.log(
+        "Primera canción finalizada. Cambiando a: " + nombreSegundaCancion
+      );
 
-    // 2. Reemplazar la fuente del audio
-    audio.src = nuevoAudio;
+      // 1. Cambiar Audio
+      audio.src = nuevoAudio;
 
-    // 3. Reemplazar la fuente de los subtítulos
-    // Buscamos el elemento <track> dentro del audio/video
-    const trackElement = document.getElementById("track");
-    if (trackElement) {
-      trackElement.src = nuevosSubs;
+      // 2. Cambiar Subtítulos
+      const trackElement = document.getElementById("track");
+      if (trackElement) {
+        trackElement.src = nuevosSubs;
+      }
+
+      // 3. Cargar y Reproducir
+      audio.load();
+      audio
+        .play()
+        .then(() => console.log("Reproduciendo segunda canción..."))
+        .catch((e) => console.error("Error al reproducir:", e));
     }
-
-    // 4. Cargar los nuevos recursos
-    // .load() es vital para que el navegador procese el cambio de src
-    audio.load();
-
-    // 5. Reproducir el nuevo audio
-    // Como el usuario ya interactuó antes con la página, el navegador permitirá el play()
-    audio
-      .play()
-      .then(() => {
-        console.log("Segunda canción reproduciéndose");
-        // Si tu sistema de subtítulos necesita reiniciarse, el evento 'load'
-        // del track debería dispararse automáticamente al cargar el nuevo src.
-      })
-      .catch((error) => {
-        console.error(
-          "Error al intentar reproducir el siguiente audio:",
-          error
-        );
-      });
-  }, 4000); // 2000 milisegundos = 2 segundos de espera
+  }, 4000); // Espera de 2 segundos antes de cambiar o redirigir
 });
