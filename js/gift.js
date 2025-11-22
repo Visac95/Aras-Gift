@@ -140,8 +140,8 @@ document.addEventListener("click", async () => {
 const nombreSegundaCancion = "Una-Flor-Samuel-Ararat";
 
 // Rutas de los archivos
-const nuevoAudio = "./../audio/Una-Flor-Samuel-Ararat.mp3";
-const nuevosSubs = "./../assets/una-flor-fl-sub.vtt";
+const nuevoAudio = "./audio/Una-Flor-Samuel-Ararat.mp3";
+const nuevosSubs = "./assets/una-flor-fl-sub.vtt";
 
 audio.addEventListener("ended", () => {
   console.log("Audio terminado. Analizando siguiente paso...");
