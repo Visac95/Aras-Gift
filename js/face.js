@@ -70,6 +70,6 @@ function accesoPermitido() {
         <p>ROSTRO VERIFICADO CORRECTAMENTE.</p>
     `;
     setTimeout(()=>{
-        cambioVentana("gift.html")
+        window.location.href = "gift.html";
     }, 3500)
 }
