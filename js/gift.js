@@ -173,5 +173,5 @@ audio.addEventListener("ended", () => {
           error
         );
       });
-  }, 2000); // 2000 milisegundos = 2 segundos de espera
+  }, 4000); // 2000 milisegundos = 2 segundos de espera
 });
