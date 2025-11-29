@@ -154,7 +154,7 @@ audio.addEventListener("ended", () => {
     // ¿El audio que acaba de terminar contenía el nombre de la segunda canción?
     if (audio.src.includes(nombreSegundaCancion)) {
       console.log("Segunda canción finalizada. Redirigiendo al inicio...");
-      window.location.href = "index.html";
+      window.location.href = "qr.html";
     } else {
       // Si NO era la segunda, asumimos que era la primera y hacemos el cambio
       console.log(
