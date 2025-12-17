@@ -55,9 +55,8 @@ submitBtn.addEventListener("click", () => {
 
     // 🧱 Mensaje final
     message.innerHTML = `
-    🚧 ESTA PÁGINA SE ENCUENTRA EN CONSTRUCCIÓN.<br>
-    YA LLEVA <b>${daysElapsed}</b> DÍAS DE TRABAJO Y AÚN NO ESTÁ LISTA.<br>
-    ⏳ SE DESBLOQUEARÁ EN <b>${remainingDays}</b> DÍAS.
+    ESTA PÁGINA ESTA LISTA.<br>
+    YA LLEVA <b>${daysElapsed}</b> DÍAS DE TRABAJO.
   `;
     overlay.style.display = "none";
     mensajeEspera.style.display = "block";
