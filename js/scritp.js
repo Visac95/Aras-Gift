@@ -35,9 +35,8 @@ submitBtn.addEventListener("click", () => {
     const daysElapsed = Math.floor(msElapsed / (1000 * 60 * 60 * 24));
 
     // 🧱 Mensaje final
-    message.innerHTML = `Sabidita has sido JAJJAJJ <br><br> ESTA PÁGINA SE ENCUENTRA EN CONSTRUCCIÓN.<br>
-    YA LLEVA <b>${daysElapsed}</b> DÍAS DE TRABAJO Y AÚN NO ESTÁ LISTA.<br>
-    ⏳ SE DESBLOQUEARÁ EN <b>${remainingDays}</b> DÍAS.
+    message.innerHTML = `A que esa no te la esperabas <br><br> ESTA PÁGINA ESTA LISTA.<br>
+    YA LLEVA <b>${daysElapsed}</b> DÍAS DE TRABAJO.<br>
   `;
     overlay.style.display = "none";
     mensajeEspera.style.display = "block";
